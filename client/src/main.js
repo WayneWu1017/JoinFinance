@@ -3,7 +3,10 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import axios from 'axios'
 
+axios.defaults.baseURL = 'http://localhost:3000'
+console.log(axios.defaults.baseURL)
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

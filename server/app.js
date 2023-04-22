@@ -1,5 +1,8 @@
 const express = require('express');
 const app = express();
+const cors = require('cors');
+
+app.use(cors());
 
 const { Spot } = require('@binance/connector')
 
@@ -12,22 +15,39 @@ const client = new Spot(API_KEY, API_SECRET);
 
 const axios = require('axios');
 
-var body = {}
-axios.get('https://api.binance.us/api/v3/trades?symbol=ETHUSDT').then(response => {
-    console.log(response.data)
-    // for(const value of response.data){
-    //     if(value['Name'].includes('0') || value['Name'].includes('1') || value['Name'].includes('2')){
-    //         continue
-    //     }
-    //     console.log(value['Name'], value['ClosingPrice']);
-    //     body[value['Name']] = value['ClosingPrice']
-    // }
-});
+const test_list = ["BTCUSDT","BNBUSDT"]
+get_price_by_symbols(test_list).then((price_list)=>{
+    console.log(price_list)
+}).catch((err) => {
+    console.log(err)
+})
 
 app.get('/', (req, res) => {
-    res.send(body);
+    console.log(req.query['symbols'])
+    for(const trading_pair of msg){
+        if(trading_pair['symbol'] == req.query['symbol']){
+            res.send(trading_pair['price']);
+            break
+        }
+    }
 })
 
 app.listen(3000, () => {
     console.log("Server is running on port 3000");
 })
+
+function list_to_string_with_bracket(origin_list){
+    return `["${origin_list.join('","')}"]`
+}
+
+function get_price_by_symbols(symbols){
+    return new Promise((res, rej) => {
+        axios.get(`https://api.binance.us/api/v3/ticker/price?symbols=${list_to_string_with_bracket(symbols)}`).then(response => {
+            const data_list = response.data
+            const price_list = data_list.map(x => x['price'])
+            res(price_list)
+        }).catch(err => {
+            rej(err.response.data.msg)
+        })
+    })
+}

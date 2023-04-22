@@ -1,13 +1,16 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
     <router-view/>
   </div>
 </template>
 
 <script>
+import BackendTest from './components/BackendTest.vue'
 export default {
-  name: 'App'
+  name: 'App',
+  components: {
+    BackendTest
+  }
 }
 </script>
 
