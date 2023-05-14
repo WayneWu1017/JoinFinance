@@ -32,7 +32,7 @@ function list_to_string_with_bracket(origin_list){
 
 function get_price_by_symbols(symbols){
     return new Promise((res, rej) => {
-        axios.get(`https://api.binance.us/api/v3/ticker/price?symbols=${list_to_string_with_bracket(symbols)}`).then(response => {
+        axios.get(`https://api.binance.us/api/v3/ticker/price?symbols=${symbols}`).then(response => {
             const data_list = response.data
             const price_list = data_list.map(x => x['price'])
             res(data_list)
