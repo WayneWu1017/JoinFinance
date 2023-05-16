@@ -1,18 +1,17 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
-  <CountWords/>
+  <CryptoPrice/>
+  <login/>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-import CountWords from './components/CountWords.vue'
+import CryptoPrice from './components/CryptoPrice.vue'
+import login from './components/login.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld,
-    CountWords
+    CryptoPrice,
+    login
   }
 }
 </script>
