@@ -1,19 +1,10 @@
 <template>
-  <CryptoPrice/>
-  <login/>
+  <!-- <router-link to="/">Go to Home</router-link><br>
+  <router-link to="/about">Go to About</router-link> -->
+  <router-view></router-view>
 </template>
 
 <script>
-import CryptoPrice from './components/CryptoPrice.vue'
-import login from './components/login.vue'
-
-export default {
-  name: 'App',
-  components: {
-    CryptoPrice,
-    login
-  }
-}
 </script>
 
 <style lang="scss">
