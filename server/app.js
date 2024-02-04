@@ -17,7 +17,7 @@ const client = new Spot(API_KEY, API_SECRET);
 const axios = require('axios');
 
 app.get('/', (req, res) => {
-    console.log(req.query['symbols'])
+    // console.log(req.query['symbols'])
     get_price_by_symbols(req.query['symbols']).then((data_list) => {
         res.send(data_list)
     })
@@ -27,11 +27,7 @@ app.listen(3000, () => {
     console.log("Server is running on port 3000");
 })
 
-function list_to_string_with_bracket(origin_list){
-    return `["${origin_list.join('","')}"]`
-}
-
-function get_price_by_symbols(symbols){
+function get_price_by_symbols(symbols) {
     return new Promise((res, rej) => {
         axios.get(`https://api.binance.us/api/v3/ticker/price?symbols=${symbols}`).then(response => {
             const data_list = response.data
